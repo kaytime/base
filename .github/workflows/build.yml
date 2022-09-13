@@ -17,8 +17,8 @@ jobs:
 
       - name: Build
         run: |
-          chmod +x "${GITHUB_WORKSPACE}/.github/gh-build.sh
-          sudo "${GITHUB_WORKSPACE}/.github/script.sh 'amd64 arm64'"
+          chmod +x "${GITHUB_WORKSPACE}/.github/gh-build.sh"
+          sudo "${GITHUB_WORKSPACE}/.github/gh-build.sh 'amd64 arm64'"
 
       - name: store root fs
         uses: actions/upload-artifact@v3
