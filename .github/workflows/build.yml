@@ -17,7 +17,7 @@ jobs:
 
       - name: Build
         run: |
-          sudo ./build.sh 'amd64 arm64'
+          sudo ./gh-build.sh 'amd64 arm64'
 
       - name: store root fs
         uses: actions/upload-artifact@v3
