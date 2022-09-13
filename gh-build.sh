@@ -33,7 +33,6 @@ create_root_fs() {
     cd "$BUILD_DIR"
     tar -cpf ../"$OUTDIR_DIR/$BASE_SYSTEM.tar" *
     cd ..
-    cp $BASE_SYSTEM
     echo "Done!"
 
     echo "Compressing $BASE_SYSTEM with XZ (using $(nproc) threads)..."
