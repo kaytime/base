@@ -22,8 +22,9 @@ jobs:
           sudo ./gh-build.sh amd64
           sudo ./gh-build.sh arm64
 
-      - name: Store
-        uses: actions/upload-artifact@v3
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          name: rootfs
-          path: ouputs/*
+          tag_name: ${{ github.event.commits[0].message }}
+          files: |
+            *.tar.xz
