@@ -17,12 +17,13 @@ mkdir $BUILD_DIR
 apt install debootstrap
 
 # Create a base system
+printf "Creating $BASE_SYSTEM... "
 
 debootstrap --variant=buildd --arch=$ARCH stable $BUILD_DIR
 
 # Create ROOTFS Archive
 
-printf "Creating $BASE_SYSTEM... "
+printf "Generating $BASE_SYSTEM archive... "
 
 cd "$BUILD_DIR"
 ls -a
