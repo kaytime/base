@@ -25,11 +25,11 @@ jobs:
       - name: Store AMD64
         uses: actions/upload-artifact@v3
         with:
-          name: rootfs_amd64_${{GITHUB_REF_NAME}}
+          name: rootfs_amd64
           path: ouputs/rootfs_amd64_${{GITHUB_REF_NAME}}.tar.xz
 
       - name: Store ARM64
         uses: actions/upload-artifact@v3
         with:
-          name: rootfs_arm64_${{GITHUB_REF_NAME}}
+          name: rootfs_arm64
           path: ouputs/rootfs_arm64_${{GITHUB_REF_NAME}}.tar.xz
