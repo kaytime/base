@@ -19,6 +19,7 @@ create_root_fs() {
     # Create new directory for this work
 
     mkdir $BUILD_DIR
+    mkdir $OUTDIR_DIR
 
     # Create a base system
 
@@ -37,9 +38,6 @@ create_root_fs() {
     xz -v --threads=$(nproc) "$BASE_SYSTEM"
 
     echo "Successfully created $BASE_SYSTEM.xz."
-
-    printf "SHA256 checksum for this build: "
-    sha256sum "$OUTDIR_DIR/$BASE_SYSTEM".xz"  "$OUTDIR_DIR/$BASE_SYSTEM".xz//"
 }
 
 # Execute base file system creation
