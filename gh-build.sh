@@ -10,7 +10,31 @@ BASE_SYSTEM=rootfs-$ARCH-$GIT_CURRENT_BRANCH
 
 BUILD_DIR=$PWD/$BASE_SYSTEM
 
+DISTRO="stable"
+
 mkdir $BUILD_DIR
+
+# Switch
+while :; do
+    case $GIT_CURRENT_BRANCH in
+    stable)
+        DISTRO="stable"
+        break
+        ;;
+    unstable)
+        DISTRO="unstable"
+        break
+        ;;
+    testing)
+        DISTRO="unstable"
+        break
+        ;;
+    *)
+        DISTRO="unstable"
+        break
+        ;;
+    esac
+done
 
 # Update repository
 
@@ -19,7 +43,7 @@ apt install debootstrap
 # Create a base system
 printf "Creating $BASE_SYSTEM... "
 
-debootstrap --variant=buildd --arch=$ARCH stable $BUILD_DIR
+debootstrap --variant=buildd --arch=$ARCH $DISTRO $BUILD_DIR
 
 # Create ROOTFS Archive
 
