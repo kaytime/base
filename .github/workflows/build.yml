@@ -18,7 +18,7 @@ jobs:
       - name: Build
         run: |
           chmod +x gh-build.sh
-          sudo gh-build.sh 'amd64 arm64'
+          sudo ./gh-build.sh 'amd64 arm64'
 
       - name: store root fs
         uses: actions/upload-artifact@v3
