@@ -3,23 +3,24 @@
 ARCH=$1
 VERSION=13092022
 
+GIT_CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+OUTDIR_DIR=$PWD/ouputs
+
+mkdir $OUTDIR_DIR
+
 create_root_fs() {
-    GIT_CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-
-    BASE_SYSTEM=rootfs_$1_$GIT_CURRENT_BRANCH
-
-    BUILD_DIR=$PWD/$BASE_SYSTEM
-
-    OUTDIR_DIR=$PWD/ouputs
-
     # Update repository
 
     apt install debootstrap
 
     # Create new directory for this work
 
+    BASE_SYSTEM=rootfs_$1_$GIT_CURRENT_BRANCH
+
+    BUILD_DIR=$PWD/$BASE_SYSTEM
+
     mkdir $BUILD_DIR
-    mkdir $OUTDIR_DIR
 
     # Create a base system
 
@@ -30,8 +31,9 @@ create_root_fs() {
     printf "Creating $BASE_SYSTEM... "
 
     cd "$BUILD_DIR"
-    tar -cpf ../"$OUTDIR_DIR/$BASE_SYSTEM" *
+    tar -cpf ../"$OUTDIR_DIR/$BASE_SYSTEM.tar" *
     cd ..
+    cp $BASE_SYSTEM
     echo "Done!"
 
     echo "Compressing $BASE_SYSTEM with XZ (using $(nproc) threads)..."
