@@ -18,6 +18,7 @@ jobs:
       - name: Build
         run: |
           chmod +x "${GITHUB_WORKSPACE}/gh-build.sh"
+          ls -a
           sudo "${GITHUB_WORKSPACE}/gh-build.sh 'amd64 arm64'"
 
       - name: store root fs
