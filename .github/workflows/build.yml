@@ -22,8 +22,14 @@ jobs:
           sudo ./gh-build.sh amd64
           sudo ./gh-build.sh arm64
 
-      - name: Store
+      - name: Store AMD64
         uses: actions/upload-artifact@v3
         with:
-          name: ouputs
-          path: ouputs
+          name: rootfs_amd64_${{GITHUB_REF_NAME}}.tar.xz
+          path: ouputs/rootfs_amd64_${{GITHUB_REF_NAME}}.tar.xz
+
+      - name: Store ARM64
+        uses: actions/upload-artifact@v3
+        with:
+          name: rootfs_arm64_${{GITHUB_REF_NAME}}.tar.xz
+          path: ouputs/rootfs_arm64_${{GITHUB_REF_NAME}}.tar.xz
