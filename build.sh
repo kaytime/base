@@ -1,6 +1,7 @@
 #! /bin/bash
 
 ARCH=$1
+VERSION=13092022
 
 create_root_fs() {
     GIT_CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
