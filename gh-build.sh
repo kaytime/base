@@ -6,7 +6,7 @@ GIT_CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 # Create new directory for this work
 
-BASE_SYSTEM=rootfs_$ARCH_$GIT_CURRENT_BRANCH
+BASE_SYSTEM=rootfs-$ARCH-$GIT_CURRENT_BRANCH
 
 BUILD_DIR=$PWD/$BASE_SYSTEM
 
