@@ -1,0 +1,26 @@
+name: Build OS
+
+on:
+  push:
+    branches:
+      - "stable"
+      - "unstable"
+      - "testing"
+    paths-ignore:
+      - "README.md"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build
+        run: |
+          sudo ./build.sh 'amd64 arm64'
+
+      - name: store root fs
+        uses: actions/upload-artifact@v3
+        with:
+          name: ouptuts
+          path: ouputs
