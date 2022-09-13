@@ -48,3 +48,5 @@ if [ "$ARCH" != "" ]; then
 else
     echo "Please give list of architecture"
 fi
+
+ls -a ouputs

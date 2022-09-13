@@ -1,4 +1,4 @@
-name: Build OS
+name: Build ROOTFS
 
 on:
   push:
@@ -23,5 +23,5 @@ jobs:
       - name: store root fs
         uses: actions/upload-artifact@v3
         with:
-          name: ouptuts
+          name: ouputs
           path: ouputs
