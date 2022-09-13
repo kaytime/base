@@ -31,12 +31,14 @@ create_root_fs() {
     printf "Creating $BASE_SYSTEM... "
 
     cd "$BUILD_DIR"
-    tar -cpf ../"$OUTDIR_DIR/$BASE_SYSTEM.tar" *
+    tar -cpf ../"$BASE_SYSTEM.tar" *
     cd ..
+
+    mv $BASE_SYSTEM.tar "$OUTDIR_DIR/$BASE_SYSTEM.tar"
     echo "Done!"
 
     echo "Compressing $BASE_SYSTEM with XZ (using $(nproc) threads)..."
-    xz -v --threads=$(nproc) "$BASE_SYSTEM"
+    xz -v --threads=$(nproc) "$OUTDIR_DIR/$BASE_SYSTEM.tar"
 
     echo "Successfully created $BASE_SYSTEM.xz."
 }

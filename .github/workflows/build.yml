@@ -20,7 +20,7 @@ jobs:
           chmod +x gh-build.sh
           sudo ./gh-build.sh 'amd64 arm64'
 
-      - name: store root fs
+      - name: Store
         uses: actions/upload-artifact@v3
         with:
           name: ouputs
