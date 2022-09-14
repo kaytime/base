@@ -1,12 +1,13 @@
 #! /bin/bash
 
 ARCH=$1
-VERSION=13092022
+VERSION="0.1.0-alpha"
 GIT_CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 # Create new directory for this work
 
-BASE_SYSTEM=rootfs-$ARCH-$GIT_CURRENT_BRANCH
+BASE_SYSTEM=rootfs-$GIT_CURRENT_BRANCH-$VERSION-$ARCH
+BASE_SYSTEM_LATEST=rootfs-$GIT_CURRENT_BRANCH-latest-$ARCH
 
 BUILD_DIR=$PWD/$BASE_SYSTEM
 
@@ -58,6 +59,8 @@ echo "Done!"
 echo "Compressing $BASE_SYSTEM with XZ (using $(nproc) threads)..."
 xz -v --threads=$(nproc) "$BASE_SYSTEM.tar"
 
-# Moving generated archive
+# Creating latest archive
+
+cp "$BASE_SYSTEM.tar.xz" "$BASE_SYSTEM_LATEST.tar.xz"
 
 echo "Successfully created $BASE_SYSTEM.xz."
