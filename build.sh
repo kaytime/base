@@ -13,7 +13,9 @@ set -e
 
 # Define the path of the debrfs configuration file
 
-CONFIG_FILE=$(pwd)/build.conf
+cat build.conf
+
+CONFIG_FILE=./build.conf
 
 echo "Configuration file: $CONFIG_FILE"
 ls -a
