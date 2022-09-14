@@ -13,12 +13,7 @@ set -e
 
 # Define the path of the debrfs configuration file
 
-cat build.conf
-
-CONFIG_FILE=./build.conf
-
-echo "Configuration file: $CONFIG_FILE"
-ls -a
+CONFIG_FILE=$(pwd)/build.conf
 
 
 # Load values from configuration file
@@ -69,14 +64,16 @@ done
 
 # Check if debootstrap is available, if not, install it
 
-PKG_OK=$(dpkg-query -W --showformat='${Status}\n' "$REQUIRED_PKG"|grep "install ok installed")
+# PKG_OK=$(dpkg-query -W --showformat='${Status}\n' "$REQUIRED_PKG"|grep "install ok installed")
 
-echo Checking for "$REQUIRED_PKG": "$PKG_OK"
+# echo Checking for "$REQUIRED_PKG": "$PKG_OK"
 
-if [ "" = "$PKG_OK" ]; then
-  echo "No $REQUIRED_PKG. Installing $REQUIRED_PKG."
-  apt install "$REQUIRED_PKG"
-fi
+# if [ "" = "$PKG_OK" ]; then
+#   echo "No $REQUIRED_PKG. Installing $REQUIRED_PKG."
+#   apt install "$REQUIRED_PKG"
+# fi
+
+apt install "$REQUIRED_PKG"
 
 
 # Create target directory for rootfs and use debootstrap to add content
