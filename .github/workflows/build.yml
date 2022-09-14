@@ -17,10 +17,9 @@ jobs:
 
       - name: Build
         run: |
-          chmod +x gh-build.sh
-          mkdir ouputs
-          sudo ./gh-build.sh amd64
-          sudo ./gh-build.sh arm64
+          chmod +x build.sh
+          sudo ./build.sh amd64
+          sudo ./build.sh arm64
 
       - name: Release
         uses: softprops/action-gh-release@v1
