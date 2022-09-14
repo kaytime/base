@@ -13,7 +13,7 @@ set -e
 
 # Define the path of the debrfs configuration file
 
-CONFIG_FILE=$(pwd)/.build.conf
+CONFIG_FILE=$(pwd)/build.conf
 
 
 # Load values from configuration file
