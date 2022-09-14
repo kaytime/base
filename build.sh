@@ -15,6 +15,7 @@ set -e
 
 CONFIG_FILE=$(pwd)/build.conf
 
+echo "Configuration file: $CONFIG_FILE"
 ls -a
 
 
