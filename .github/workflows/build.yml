@@ -25,7 +25,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.event.head_commit.message }}
-          body: ${{ github.event.head_commit.messageBody }}
+          tag_name: ${{ github.event.commits[][message] }}
+          body: ${{ github.event.commits }}
           files: |
             *.tar.xz
