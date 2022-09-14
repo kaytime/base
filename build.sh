@@ -15,6 +15,8 @@ set -e
 
 CONFIG_FILE=$(pwd)/build.conf
 
+ls -a
+
 
 # Load values from configuration file
 # Include fix for SC1090 – ShellCheck
