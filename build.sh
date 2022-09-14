@@ -35,10 +35,11 @@ ARCH=$1
 VERSION="0.1.0-alpha"
 GIT_CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-# Define filename for compressed directory
-
 BASE_SYSTEM=rootfs-$GIT_CURRENT_BRANCH-$VERSION-$ARCH
 BASE_SYSTEM_LATEST=rootfs-$GIT_CURRENT_BRANCH-latest-$ARCH
+
+BASE_SYSTEM_DIR=$(pwd)/$BASE_SYSTEM
+BASE_SYSTEM_FILE="$BASE_SYSTEM.tar.xz"
 
 while :; do
     case $GIT_CURRENT_BRANCH in
@@ -79,31 +80,30 @@ apt install "$REQUIRED_PKG"
 # Create target directory for rootfs and use debootstrap to add content
 # Clean target directory if already present and add content
 
-if [[ ! -d $ROOTFS_DIR ]]; then
+if [[ ! -d $BASE_SYSTEM_DIR ]]; then
     echo "Directory not found! Creating..." 2>&1
-    mkdir -p "$ROOTFS_DIR"
-    debootstrap --variant="$ROOTFS_VARIANT" --exclude="$ROOTFS_EXCLUDE" --arch "$ARCH" --cache-dir=/tmp "$BASE_CHANNEL" "$ROOTFS_DIR" "$ROOTFS_MIRROR"
+    mkdir -p "$BASE_SYSTEM_DIR"
+    debootstrap --variant="$ROOTFS_VARIANT" --exclude="$ROOTFS_EXCLUDE" --arch "$ARCH" --cache-dir=/tmp "$BASE_CHANNEL" "$BASE_SYSTEM_DIR" "$ROOTFS_MIRROR"
     else
     echo "Directory found! Cleaning..."
-    rm -rf "$ROOTFS_DIR" && mkdir -p "$ROOTFS_DIR"
-    debootstrap --variant="$ROOTFS_VARIANT" --exclude="$ROOTFS_EXCLUDE" --arch "$ARCH" --cache-dir=/tmp "$BASE_CHANNEL" "$ROOTFS_DIR" "$ROOTFS_MIRROR"
+    rm -rf "$BASE_SYSTEM_DIR" && mkdir -p "$BASE_SYSTEM_DIR"
+    debootstrap --variant="$ROOTFS_VARIANT" --exclude="$ROOTFS_EXCLUDE" --arch "$ARCH" --cache-dir=/tmp "$BASE_CHANNEL" "$BASE_SYSTEM_DIR" "$ROOTFS_MIRROR"
 fi
 
 
 # Compress rootfs directory using TAR and XZ
 
-if [[ ! -f $TAR_FILE ]]; then
+if [[ ! -f $BASE_SYSTEM_FILE ]]; then
     echo "File not found! Creating..." 2>&1
-    rm "$ROOTFS_DIR"/var/cache/apt/archives/*.deb && tar -I 'xz -9' -cvf "$TAR_FILE" --exclude="$ROOTFS_DIR/var/cache/apt/archives" -C "$ROOTFS_DIR" .
+    rm "$BASE_SYSTEM_DIR"/var/cache/apt/archives/*.deb && tar -I 'xz -9' -cvf "$BASE_SYSTEM_FILE" --exclude="$BASE_SYSTEM_DIR/var/cache/apt/archives" -C "$BASE_SYSTEM_DIR" .
     else
     echo "File found! Cleaning..."
-    rm -rf "$TAR_FILE" && rm "$ROOTFS_DIR"/var/cache/apt/archives/*.deb && tar -I 'xz -9' -cvf "$TAR_FILE" --exclude="$ROOTFS_DIR/var/cache/apt/archives" -C "$ROOTFS_DIR" .
+    rm -rf "$BASE_SYSTEM_FILE" && rm "$BASE_SYSTEM_DIR"/var/cache/apt/archives/*.deb && tar -I 'xz -9' -cvf "$BASE_SYSTEM_FILE" --exclude="$BASE_SYSTEM_DIR/var/cache/apt/archives" -C "$BASE_SYSTEM_DIR" .
 fi
 
 
 # Generated versionned archives
 
-cp "$TAR_FILE" "$BASE_SYSTEM.tar.xz"
-cp "$TAR_FILE" "$BASE_SYSTEM_LATEST.tar.xz"
+cp "$BASE_SYSTEM_FILE" "$BASE_SYSTEM_LATEST.tar.xz"
 
 echo "Successfully created base system."
