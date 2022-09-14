@@ -17,6 +17,7 @@ jobs:
 
       - name: Build
         run: |
+          echo "${{toJSON(github.event)}}"
           chmod +x gh-build.sh
           mkdir ouputs
           sudo ./gh-build.sh amd64
@@ -25,7 +26,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.event.commits[][message] }}
-          body: ${{ github.event.commits }}
+          tag_name: ${{ github.event.head_commit.message }}
+          body: ${{ github.event.head_commit.messageBody }}
           files: |
             *.tar.xz
