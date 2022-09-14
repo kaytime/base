@@ -17,7 +17,6 @@ jobs:
 
       - name: Build
         run: |
-          echo "${{toJSON(github.event)}}"
           chmod +x gh-build.sh
           mkdir ouputs
           sudo ./gh-build.sh amd64
