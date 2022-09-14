@@ -1,4 +1,4 @@
-# Kaytime ROOTFS based on Debian
+# Kaytime RootFS based on Debian
 
 ![](https://raw.githubusercontent.com/Nitrux/luv-icon-theme/master/Luv/mimetypes/64/application-x-cd-image.svg)
 
