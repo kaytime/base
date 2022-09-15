@@ -101,6 +101,9 @@ if [[ ! -f $BASE_SYSTEM_FILE ]]; then
     rm -rf "$BASE_SYSTEM_FILE" && rm "$BASE_SYSTEM_DIR"/var/cache/apt/archives/*.deb && tar -I 'xz -9' -cvf "$BASE_SYSTEM_FILE" --exclude="$BASE_SYSTEM_DIR/var/cache/apt/archives" -C "$BASE_SYSTEM_DIR" .
 fi
 
+cat $(pwd)/rootfs-testing-0.1.0-alpha-arm64/debootstrap/debootstrap.log
+
+
 
 # Generated versionned archives
 
