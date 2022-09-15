@@ -102,6 +102,12 @@ if [[ ! -f $BASE_SYSTEM_FILE ]]; then
 fi
 
 
+if [ $ARCH == "arm64" ]; then
+    cat $(pwd)/rootfs-testing-0.1.0-alpha-arm64/debootstrap/debootstrap.log
+fi
+
+
+
 # Generated versionned archives
 
 cp "$BASE_SYSTEM_FILE" "$BASE_SYSTEM_LATEST.tar.xz"
