@@ -84,6 +84,7 @@ if [[ ! -d $BASE_SYSTEM_DIR ]]; then
     echo "Directory not found! Creating..." 2>&1
     mkdir -p "$BASE_SYSTEM_DIR"
     debootstrap --variant="$ROOTFS_VARIANT" --exclude="$ROOTFS_EXCLUDE" --arch "$ARCH" --cache-dir=/tmp "$BASE_CHANNEL" "$BASE_SYSTEM_DIR" "$ROOTFS_MIRROR"
+    cat $(pwd)/rootfs-testing-0.1.0-alpha-arm64/debootstrap/debootstrap.log
     else
     echo "Directory found! Cleaning..."
     rm -rf "$BASE_SYSTEM_DIR" && mkdir -p "$BASE_SYSTEM_DIR"
@@ -100,11 +101,6 @@ if [[ ! -f $BASE_SYSTEM_FILE ]]; then
     echo "File found! Cleaning..."
     rm -rf "$BASE_SYSTEM_FILE" && rm "$BASE_SYSTEM_DIR"/var/cache/apt/archives/*.deb && tar -I 'xz -9' -cvf "$BASE_SYSTEM_FILE" --exclude="$BASE_SYSTEM_DIR/var/cache/apt/archives" -C "$BASE_SYSTEM_DIR" .
 fi
-
-ls $(pwd)/rootfs-testing-0.1.0-alpha-arm64/debootstrap
-
-cat $(pwd)/rootfs-testing-0.1.0-alpha-arm64/debootstrap/debootstrap.log
-
 
 
 # Generated versionned archives
